@@ -68,99 +68,6 @@ class PayTr {
       .digest("base64");
   }
 
-  async listCards(data) {
-    const paytr_token = this.genToken({ utoken: data.utoken });
-    data.paytr_token = paytr_token;
-    data.merchant_id = this.merchant_id;
-    return this.request(
-      "POST",
-      "/odeme/capi/list",
-      data,
-      "application/x-www-form-urlencoded"
-    );
-  }
-
-  async removeCard(data) {
-    const paytr_token = this.genToken({
-      ctoken: data.ctoken,
-      utoken: data.utoken,
-    });
-    data.paytr_token = paytr_token;
-    data.merchant_id = this.merchant_id;
-    return this.request(
-      "POST",
-      "/odeme/capi/delete",
-      data,
-      "application/x-www-form-urlencoded"
-    );
-  }
-
-  async paymentNoCardStoring(data) {
-    const paytr_token = this.genToken({
-      merchant_id: this.merchant_id,
-      user_ip: data.user_ip,
-      merchant_oid: data.merchant_oid,
-      email: data.email,
-      payment_amount: data.payment_amount,
-      payment_type: "card",
-      installment_count: data.installment_count,
-      test_mode: data.test_mode,
-      non_3d: data.non_3d,
-    });
-
-    data.merchant_fail_url = this.failedWebHookUrl;
-    data.merchant_ok_url = this.failedWebHookUrl;
-    data.paytr_token = paytr_token;
-    data.merchant_id = this.merchant_id;
-
-    return this.request("POST", "/odeme", data, "multipart/form-data");
-  }
-
-  async paymentStoreCard(data) {
-    const paytr_token = this.genToken({
-      merchant_id: this.merchant_id,
-      user_ip: data.user_ip,
-      merchant_oid: data.merchant_oid,
-      email: data.email,
-      payment_amount: data.payment_amount,
-      payment_type: "card",
-      installment_count: data.installment_count,
-      test_mode: data.test_mode,
-      non_3d: data.non_3d,
-    });
-
-    data.merchant_fail_url = this.failedWebHookUrl;
-    data.merchant_ok_url = this.failedWebHookUrl;
-    data.paytr_token = paytr_token;
-    data.merchant_id = this.merchant_id;
-    data.store_card = 1;
-
-    return this.request("POST", "/odeme", data, "multipart/form-data");
-  }
-
-  async paymentRecuring(data) {
-    const paytr_token = this.genToken({
-      merchant_id: this.merchant_id,
-      user_ip: data.user_ip,
-      merchant_oid: data.merchant_oid,
-      email: data.email,
-      payment_amount: data.payment_amount,
-      payment_type: "card",
-      installment_count: data.installment_count,
-      test_mode: data.test_mode,
-      non_3d: data.non_3d,
-    });
-
-    data.merchant_fail_url = this.failedWebHookUrl;
-    data.merchant_ok_url = this.failedWebHookUrl;
-    data.paytr_token = paytr_token;
-    data.merchant_id = this.merchant_id;
-    data.non_3d = 1;
-    data.recurring_payment = 1;
-
-    return this.request("POST", "/odeme", data, "multipart/form-data");
-  }
-
   callBack(request) {
     const token = this.genToken({
       merchant_oid: request.merchant_oid,
@@ -217,6 +124,8 @@ module.exports = {
   paymentService,
 };
 
+/* TEST */
+/*
 // Prepare payment data
 const paymentData = {
   user_ip: "127.0.0.1",
@@ -278,3 +187,4 @@ paymentService
     // Handle any errors
     console.error("Error making payment:", error.message);
   });
+*/

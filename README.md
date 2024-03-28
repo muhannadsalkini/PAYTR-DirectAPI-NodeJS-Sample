@@ -2,6 +2,10 @@
 
 This repository contains a Node.js implementation for integrating with PAYTR Direct API for processing payments. This implementation provides functionalities for generating payment tokens, handling callbacks, and initiating payments.
 
+## Documentation
+
+For detailed documentation on PAYTR Direct API, refer to [PAYTR Direct API Documentation](https://dev.paytr.com/en/direkt-api).
+
 ## Prerequisites
 
 Before using this code, ensure you have the following:
